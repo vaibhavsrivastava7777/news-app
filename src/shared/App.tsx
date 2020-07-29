@@ -22,7 +22,7 @@ const App: React.FC<any> = () => {
         // <Suspense fallback={<div>Loading</div>}>
         <div className={css.wrapper}>
             <Helmet
-                defaultTitle="React SSR Starter – TypeScript Edition"
+                defaultTitle="React SSR Starter – TypeScript Edition By Vaibhav"
                 titleTemplate="%s – React SSR Starter – TypeScript Edition"
                 link={[{ rel: 'icon', type: 'image/png', href: favicon }]}
             />
