@@ -4,7 +4,7 @@
   "author": "Manuel Bieh <npm@manuelbieh.de> (https://github.com/manuelbieh)",
   "license": "MIT",
   "engines": {
-    "node": "12.16.2",
+    "node": ">=10.18.1",
     "yarn": "^1.22.0"
   },
   "scripts": {
@@ -22,7 +22,8 @@
     "lint:css": "stylelint src/**/*.css",
     "lint:deps": "depcruise -c .dependency-cruiser.js src/",
     "plop": "plop",
-    "start": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/start",
+    "dev": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/start",
+    "start": "node build/server/server.js",
     "start:analyzer": "webpack-bundle-analyzer build/client/static/bundle-stats.json",
     "test": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/test --env=jsdom",
     "test:update": "yarn-or-npm test --updateSnapshot",
