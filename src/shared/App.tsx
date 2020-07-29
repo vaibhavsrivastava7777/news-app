@@ -23,12 +23,12 @@ const App: React.FC<any> = () => {
         <div className={css.wrapper}>
             <Helmet
                 defaultTitle="React SSR Starter – TypeScript Edition By Vaibhav"
-                titleTemplate="%s – React SSR Starter – TypeScript Edition"
+                titleTemplate="%s – React SSR Starter – TypeScript Edition by vaibhav"
                 link={[{ rel: 'icon', type: 'image/png', href: favicon }]}
             />
             <h1>
                 <ReactLogo className={css.reactLogo} /> React + Express – SSR Starter – TypeScript
-                Edition
+                Edition By vaibhav
             </h1>
             <Switch>
                 <Route exact path={routes.home} component={Home} />
