@@ -1,0 +1,87 @@
+.row {
+    display: flex;
+}
+
+.col-10 {
+    /* max-width: 48px; */
+    width: 10%;
+}
+
+.col {
+    max-width: 100%;
+    width: 100%;
+}
+
+.header {
+    div {
+        background-color: #ffa500;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        height: 40px;
+        padding: 8px 8px 0 8px;
+        text-align: center;
+    }
+
+    div:last-child {
+        text-align: left;
+    }
+}
+
+.item {
+    div {
+        font-size: 14px;
+        padding: 8px 8px 0 8px;
+        text-align: center;
+    }
+
+    div:last-child {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .container {
+        display: flex;
+    }
+
+    .header {
+        /* flex-direction: column; */
+        display: none;
+        /* div {
+            width: 100%;
+        } */
+    }
+
+    .item {
+        flex-direction: column;
+
+        div::before {
+            background-color: #ffa500;
+            color: #fff;
+            display: block;
+            font-weight: 500;
+            min-width: 100px;
+            width: 100px;
+        }
+
+        div:nth-of-type(1):before {
+            content: 'Comments';
+        }
+        div:nth-of-type(2):before {
+            content: 'Vote Count';
+        }
+        div:nth-of-type(3):before {
+            content: 'UpVote';
+        }
+        div:nth-of-type(4):before {
+            content: 'News Details';
+        }
+
+        div {
+            display: flex;
+            text-align: left;
+            width: 100%;
+        }
+    }
+}
