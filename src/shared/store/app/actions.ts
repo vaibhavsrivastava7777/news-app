@@ -31,7 +31,7 @@ function setNews(payload: any) {
 export function newsAsync(config: any) {
     return (dispatch: any) => {
         // Yay! Can invoke sync or async actions with `dispatch`
-        fetch(`http://hn.algolia.com/api/v1/search?page=${config.page}`)
+        fetch(`https://hn.algolia.com/api/v1/search?page=${config.page}`)
             .then((response) => response.json())
             .then((response) => {
                 dispatch(setNews(response));
