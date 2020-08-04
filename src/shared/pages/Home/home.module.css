@@ -29,6 +29,9 @@
 }
 
 .item {
+    border-bottom: 1px solid grey;
+    padding: 4px 0 4px 0;
+
     div {
         font-size: 14px;
         padding: 8px 8px 0 8px;
@@ -43,14 +46,13 @@
 @media only screen and (max-width: 1000px) {
     .container {
         display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .header {
-        /* flex-direction: column; */
         display: none;
-        /* div {
-            width: 100%;
-        } */
     }
 
     .item {
