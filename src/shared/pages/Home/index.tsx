@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+
 import { newsAsync, setHideMap, initHideMap, initUpVoteMap, setUpVoteMap } from 'store/app/actions';
 import { getNews, getHideMap, getUpVoteMap } from 'store/app/selectors';
 import { ReactComponent as UpVote } from '../../assets/triangle.svg';
-import Chart from '../../components/Features';
+import Chart from '../../components/Chart';
 import Loader from '../../components/Loader';
 import css from './home.module.css';
 
 const Home: React.FC<any> = () => {
-    // const { t } = useTranslation();
     const dispatch = useDispatch();
     const news = useSelector(getNews);
     const hideMap = useSelector(getHideMap);
     const upVoteMap = useSelector(getUpVoteMap);
+    const { page } = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         if (upVoteMap === null) {
@@ -21,10 +25,11 @@ const Home: React.FC<any> = () => {
         if (hideMap === null) {
             dispatch(initHideMap());
         }
-        if (news === null) {
-            dispatch(newsAsync({ page: 0 }));
-        }
     });
+
+    useEffect(() => {
+        dispatch(newsAsync({ page }));
+    }, [dispatch, page]);
 
     const getUrl = (url: string) => {
         try {
@@ -68,17 +73,18 @@ const Home: React.FC<any> = () => {
     };
 
     const previousPage = () => {
-        const page = news.page - 1;
-        if (page >= 0) {
-            dispatch(newsAsync({ page }));
+        const newPage = news.page - 1;
+        if (newPage >= 0) {
+            // dispatch(newsAsync({ page: newPage }));
+            history.push(`/${newPage}`);
         }
-        console.log(page);
     };
 
     const nextPage = () => {
-        const page = news.page + 1;
-        if (page <= news.nbPages) {
-            dispatch(newsAsync({ page }));
+        const newPage = news.page + 1;
+        if (newPage <= news.nbPages) {
+            // dispatch(newsAsync({ page: newPage }));
+            history.push(`/${newPage}`);
         }
     };
 
@@ -87,59 +93,65 @@ const Home: React.FC<any> = () => {
     }
     return (
         <React.Fragment>
-            <div className={css.container}>
-                <div className={`${css.row} ${css.header}`}>
-                    <div className={css['col-10']}>Comments</div>
-                    <div className={css['col-10']}>Vote Count</div>
-                    <div className={css['col-10']}>UpVote</div>
-                    <div className={css.col}>News Details</div>
+            <a className={css.skipLink} href="#maincontent">
+                Skip to main
+            </a>
+            <h1 className={css.newsHeading}>Hacker News</h1>
+            <main id="maincontent">
+                <div className={css.container}>
+                    <div className={`${css.row} ${css.header}`}>
+                        <div className={css['col-10']}>Comments</div>
+                        <div className={css['col-10']}>Vote Count</div>
+                        <div className={css['col-10']}>UpVote</div>
+                        <div className={css.col}>News Details</div>
+                    </div>
+                    {hits &&
+                        hits.map((hit: any) => {
+                            return (
+                                <div key={hit.objectID} className={`${css.row} ${css.item}`}>
+                                    <div className={css['col-10']}>
+                                        <span>{hit.comments}</span>
+                                    </div>
+                                    <div className={css['col-10']}>
+                                        <span>{hit.upvote}</span>
+                                    </div>
+                                    <div className={css['col-10']}>
+                                        <span>
+                                            <UpVote
+                                                className={css.upVote}
+                                                onClick={() => upVote(hit.objectID)}
+                                            />
+                                        </span>
+                                    </div>
+                                    <div className={css.col}>
+                                        <span>
+                                            {hit.title} {hit.url} by {hit.author} {hit.created_at_i}{' '}
+                                            days ago{' '}
+                                            <button
+                                                type="button"
+                                                className={css.btnToLink}
+                                                onClick={() => hideHit(hit.objectID)}
+                                            >
+                                                [Hide]
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        })}
                 </div>
-                {hits &&
-                    hits.map((hit: any) => {
-                        return (
-                            <div key={hit.objectID} className={`${css.row} ${css.item}`}>
-                                <div className={css['col-10']}>
-                                    <span>{hit.comments}</span>
-                                </div>
-                                <div className={css['col-10']}>
-                                    <span>{hit.upvote}</span>
-                                </div>
-                                <div className={css['col-10']}>
-                                    <span>
-                                        <UpVote
-                                            className={css.upVote}
-                                            onClick={() => upVote(hit.objectID)}
-                                        />
-                                    </span>
-                                </div>
-                                <div className={css.col}>
-                                    <span>
-                                        {hit.title} {hit.url} by {hit.author} {hit.created_at_i}{' '}
-                                        days ago{' '}
-                                        <button
-                                            type="button"
-                                            className={css.btnToLink}
-                                            onClick={() => hideHit(hit.objectID)}
-                                        >
-                                            [Hide]
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        );
-                    })}
-            </div>
-            <div className={css.pageBtns}>
-                <button type="button" className={css.btnToLink} onClick={previousPage}>
-                    Previous
-                </button>
-                |
-                <button type="button" className={css.btnToLink} onClick={nextPage}>
-                    Next
-                </button>
-            </div>
+                <div className={css.pageBtns}>
+                    <button type="button" className={css.btnToLink} onClick={previousPage}>
+                        Previous
+                    </button>
+                    |
+                    <button type="button" className={css.btnToLink} onClick={nextPage}>
+                        Next
+                    </button>
+                </div>
 
-            {upVoteMap && <Chart upVoteMap={upVoteMap} />}
+                {upVoteMap && <Chart upVoteMap={upVoteMap} />}
+            </main>
         </React.Fragment>
     );
 };

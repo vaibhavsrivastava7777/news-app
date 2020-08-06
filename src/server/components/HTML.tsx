@@ -15,9 +15,20 @@ const HTML = ({
     state = '{}',
     helmetContext: { helmet },
 }: Props) => (
-    <html lang="">
+    <html lang="en">
         <head>
+            <title>Hacker News</title>
             <meta charSet="utf-8" />
+            <meta
+                name="description"
+                content="Hacker News is a community started by Paul Graham, for sharing 
+            Anything that good hackers would find interesting. That includes more than hacking and startups. 
+            If you had to reduce it to a sentence, the answer might be: anything that gratifies one's intellectual curiosity."
+            />
+            <meta
+                name="keywords"
+                content="Hacker, News, Paul, Graham, intresting, intellectual, curiosity, community"
+            />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             {helmet.base.toComponent()}
             {helmet.title.toComponent()}

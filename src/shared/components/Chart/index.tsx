@@ -10,6 +10,15 @@ interface Data {
     labels: string[];
     datasets: Datasets[];
 }
+
+interface Chart {
+    upVoteMap: UpVoteMap[];
+}
+
+interface UpVoteMap {
+    [key: string]: string;
+}
+
 const data: Data = {
     labels: [],
     datasets: [
@@ -36,13 +45,6 @@ const data: Data = {
         },
     ],
 };
-
-interface Chart {
-    upVoteMap: UpVoteMap[];
-}
-interface UpVoteMap {
-    [key: string]: string;
-}
 
 const Chart: React.FC<Chart> = (props) => {
     console.log(props);

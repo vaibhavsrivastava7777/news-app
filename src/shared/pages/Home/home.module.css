@@ -43,7 +43,7 @@ body {
 }
 
 .item {
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid #767676;
     padding: 4px 0 4px 0;
 
     div {
@@ -52,9 +52,9 @@ body {
         text-align: center;
 
         span {
-            font-size: 12px;
-            padding-left: 12px;
-            padding-top: 12px;
+            font-size: 14px;
+            padding-left: 14px;
+            padding-top: 14px;
         }
     }
 
@@ -63,21 +63,37 @@ body {
     }
 
     a {
-        color: rgb(177, 177, 177);
+        color: #767676;
     }
 }
 
 .upVote {
     cursor: pointer;
-    fill: rgb(177, 177, 177);
-    height: 12px;
+    fill: #767676;
+    height: 14px;
 }
 
 .btnToLink {
     background: transparent;
     border: none;
-    color: rgb(177, 177, 177);
+    color: #767676;
     cursor: pointer;
+}
+
+.skipLink {
+    color: #767676;
+    font-size: 14px;
+    padding: 8px;
+    position: fixed;
+    right: 0;
+    top: 0px;
+    z-index: 100;
+}
+.newsHeading {
+    color: #767676;
+}
+.skipLink:focus {
+    top: 0;
 }
 
 @media only screen and (max-width: 1000px) {
