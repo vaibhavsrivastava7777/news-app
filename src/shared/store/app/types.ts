@@ -4,6 +4,7 @@ export type AppState = Readonly<{
     locale: Locale;
     news: any;
     hideMap: any;
+    upVoteMap: any;
 }>;
 
 export type Action = {

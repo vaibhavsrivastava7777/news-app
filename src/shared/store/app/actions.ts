@@ -5,10 +5,21 @@ export const ActionTypes = {
     SET_NEWS: 'SET_NEWS',
     SET_HIDE_MAP: 'SET_HIDE_MAP',
     INIT_HIDE_MAP: 'INIT_HIDE_MAP',
+    UP_VOTE: 'UP_VOTE',
+    INIT_UP_VOTE_MAP: 'INIT_UP_VOTE_MAP',
 };
+
+export const initUpVoteMap = () => ({
+    type: ActionTypes.INIT_UP_VOTE_MAP,
+});
 
 export const initHideMap = () => ({
     type: ActionTypes.INIT_HIDE_MAP,
+});
+
+export const setUpVoteMap = (objectId: string) => ({
+    type: ActionTypes.UP_VOTE,
+    payload: objectId,
 });
 
 export const setHideMap = (objectId: string) => ({
