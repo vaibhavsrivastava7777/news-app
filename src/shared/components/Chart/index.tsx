@@ -51,6 +51,6 @@ const Chart: React.FC<Chart> = (props) => {
     const { upVoteMap = {} } = props;
     data.labels = Object.keys(upVoteMap);
     data.datasets[0].data = Object.values(upVoteMap || []);
-    return <div>{data.labels.length && <Line data={data} />}</div>;
+    return <div>{data.labels.length > 0 && <Line data={data} />}</div>;
 };
 export default Chart;
